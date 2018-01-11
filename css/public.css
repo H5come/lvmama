@@ -1,0 +1,42 @@
+html,body{
+    height:100%;    
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; 
+    background:#fff!important;
+}
+div{
+    background:#fff;
+}
+.border{
+    border:1px solid #d5d5d5;
+}
+img{
+    width:100%;
+    height:100%;
+}
+.font18{
+    color:#ff7900;
+    font-size:18px;
+}
+.inlineBlock{
+    display: inline-block;
+}
+
+
+
+.widthDiv{
+    width:1200px;
+    margin:0 auto;
+}
+.theMore{
+    color:#2fd0b5;
+}
+.textLeft{
+    text-align:left;
+}
+.textRight{
+    text-align:right;
+}
+.theHeight{
+    height:33px;
+    line-height:48px;
+}
