@@ -1,7 +1,7 @@
 html,body{
     height:100%;    
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif; 
-    background:#fff!important;
+    background:#fff;
 }
 div{
     background:#fff;
@@ -21,7 +21,10 @@ img{
     display: inline-block;
 }
 
-
+/*弹框样式修改*/
+div.ivu-modal-mask{
+    background-color: rgba(55,55,55,.6);
+}
 
 .widthDiv{
     width:1200px;
