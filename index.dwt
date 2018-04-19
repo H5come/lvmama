@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">      
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/index.css">
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>驴妈妈</title>
+    <style>
+        /* div.footer{bottom:auto} */
+        .footer img{width:242px;height:54px;}
+        .ivu-spin-fix{position: fixed;}
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->  
+    <div id="index">
+        <Spin fix v-show="loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>
+        <div v-show="!loading">
+        <!-- <Spin fix v-show="loading1">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>  -->
+        <div class="newsimg">
+			<div class="fullSlide">
+				<div class="bd">
+					<ul>						
+						<li v-for="(item,index) in banner" :key="index" :style="{backgroundImage:'url(/data/afficheimg/'+item.ad_code+')',backgroundSize:'cover'}">
+                        </li>
+					</ul>
+				</div>
+				<div class="hd">
+					<ul></ul>
+				</div>
+				<span class="prev"></span>
+				<span class="next"></span>
+			</div>
+		</div>
+        <div class="search">
+			<div class="search_1200">
+				<div class="tips f_l">
+					<!-- <span class="tip"></span>
+					<div class="txtMarquee-top">
+						<div class="bd">
+							<div class="tempWrap">
+							<ul class="infoList">
+								{foreach from=$text item=t}
+								<li><a href="{$t.ad_link}" target="_blank">{$t.ad_name}</a></li>
+                                {foreachelse}
+                                    <li> 暂无广播 </li>
+                                {/foreach}				
+							</ul>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<div class="search_input f_r">					
+                    <input type="text"  name="keywords" placeholder="请输入关键词、景点名称" v-model="messageEnd" @keyup.enter="submitToListPage">
+					<i @click="submitToListPage()"></i>	
+				</div>
+			</div>
+		</div>
+        <!--搜索到此结束-->
+        <div class="layout widthDiv">
+            <Layout>
+                <Header class="mainTopic">
+                    <div class="row">
+                        <div class="hd">
+						    <span class="prev prevStop"></span>
+						    <span class="next"></span>
+				        </div>
+                        <div class="bd">
+                            <ul class="lvmama_all">
+                                <li class="i-col cursor" v-for="(item,index) in zhuti" :key="index" @click="toListPage(item)">
+                                    <div class="imgDiv">
+                                        <img :src="'/images/juyoufuli/brand/'+item.id+'.jpg'" alt="">
+                                        <span v-text="item.name"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Header>
+                <Content class="content">
+                    <div class="every_mianTopic" v-for="(item,index) in floorTopic" :key="index">
+                        <div>
+                            <Row class="floorTil">
+                                <i-col span="6" class="textLeft">
+                                    <span class="i-span">
+                                        <i v-text="'F' + (index+1)"></i>
+                                        <span v-text="item.themes.name" class="color14"></span>
+                                    </span>
+                                </i-col>
+                                <i-col span="6" offset="12" class="theMore textRight theHeight" @click.native="toListPage(item.themes)">更多 >></i-col>
+                            </Row>
+                        </div>
+                        <div class="floorContent border cursor">
+                            <div class="floorRow" v-for="(item,index) in item.list" :key="index" :id="item.productId">
+                                <div class="floorImgDiv">
+                                    <img  v-if="item.images" :src="item.images[0]" alt=""> 
+                                </div>
+                                <div class="floorDesc border">
+                                    <p class="fname" :title="item.productName" v-text="item.productName"></p>
+                                    <p class="fprice">
+                                        <span><i class="font18" v-text="item.price"></i>点起</span>
+                                        <span class="button" @click="todetail(item)">预定</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Content>
+            </Layout> 
+        </div>
+        </div>
+    </div>
+    <!-- 公共左边 -->
+    <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+    <!-- 公共左边结束 -->
+    <!-- 公用底部 -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/index.js"></script>
+</body>
+</html>

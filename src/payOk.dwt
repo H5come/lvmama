@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">  
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">    
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/payOk.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>提交订单</title>
+    <style>
+        div.footer{bottom:0}
+        .footer img{width:242px;height:54px;}
+    </style>
+</head>
+<body style="background:#fff;">
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->
+    <div id="payOk" class="widthDiv">
+        <div class="Process marginB"></div>
+        <div class="textCenter">
+            <p class="marginB">
+                <span class="color3b fontweight"><i class="ok inlineBlock"></i>订单支付成功</span>
+            </p>
+            <p  class="marginB">
+                <span class="bg2fd colorff  inlineBlock padding20 height30 radius" @click="backIndex()">返回首页</span>
+                <span class="bg colorff inlineBlock padding20 height30 radius marginL"  @click="backMyOrder()">我的订单</span>
+            </p>
+        </div>
+    </div>
+    <!-- 公共左边 -->
+    <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+    <!-- 公共左边结束 -->
+    <!-- 公用底部 -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/payOk.js"></script>
+</body>
+</html>

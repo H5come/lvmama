@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">  
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">    
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/list.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>驴妈妈列表页</title>
+    <style>
+        div.footer{bottom:auto}
+        .footer img{width:242px;height:54px;}
+        .ivu-spin-fix{position: fixed;}
+    </style>
+</head>
+<body style="background:#fff;">
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->
+    <div id="list">
+        <Spin fix v-show="loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>
+        <div  v-show="!loading">
+        <div class="newsimg">
+            <div class="fullSlide">
+                <div class="bd">
+                    <ul>						
+                        <li v-for="(item,index) in banner" :key="index" :style="{backgroundImage:'url(/data/afficheimg/'+item.ad_code+')',backgroundSize:'cover'}">
+                        </li>	
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul></ul>
+                </div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </div>
+        </div>
+        <div class="search">
+            <div class="search_1200">
+                <div class="tips f_l">
+                    <span class="tip"></span>
+                    <div class="txtMarquee-top">
+                        <div class="bd">
+                            <div class="tempWrap">
+                            <ul class="infoList">
+                                <!-- {foreach from=$text item=t}
+                                <span><a href="{$t.ad_link}" target="_blank">{$t.ad_name}</a></span>
+                                {foreachelse}
+                                    <span> 暂无广播 </span>
+                                {/foreach}				 -->
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_input f_r">					
+                    <input type="text"  name="keywords" placeholder="请输入关键词、景点名称" v-model="messageEnd" @keyup.enter="submitToListPage">
+                    <i @click="submitToListPage()"></i>
+                </div>
+            </div>
+        </div>
+        <!--搜索到此结束-->
+        <div class="widthDiv">
+            <div  class="noResultsDiv"  v-show="result">
+                <div class="noResults">
+                    <div class="noResult_tip">
+                        <p v-text="'非常抱歉，没有找到符合'+ searchTerms + '的产品'" class="color33"></p>
+                        <p class="color80">建议您看看其他类的产品~</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hasResults" v-show="!result">
+                <div class="filter">
+                    <!-- <div class="destination">
+                        <div :class="{destinationDiv:expandFlag,destinationDivActive:!expandFlag}">
+                            <i class="color80">区域</i>
+                            <span v-for="(item,index) in Regional" :class="{spanActive:item.state == 'true'}" @click="selectMethod('3_' + item.id,3)" :key="index" :id="'3_' + item.id" v-text="item.name" class="cursor"></span>
+                        </div>
+                        <div class="expandDiv"  @click="expands($('.destinationDiv'),'expand')">
+                            <span class="expand cursor" v-show="expand">更多</span>
+                            <span class="expand cursor" v-show="!expand">收起</span>
+                        </div>
+                    </div> -->
+                    <div class="ThemesAttr">
+                        <div :class="{themesAttrDiv:expandFlag1,themesAttrDivActive:!expandFlag1}">
+                            <i class="color80" >主题</i>
+                            <span v-for="(item,index) in themes" :class="{spanActive:item.state == 'true'}" @click="selectMethod('2_' + item.id,4)" :key="index" :id="'2_' + item.id" v-text="item.name"  class="cursor"></span>
+                        </div>
+                        <div class="expandDiv"  @click="expands($('.themesAttrDiv'),'expand1')">
+                            <span class="expand" v-show="expand1">更多</span>
+                            <span class="expand" v-show="!expand1">收起</span>
+                        </div>
+                    </div>
+                    <div class="sortDiv">
+                        <div class="sort">
+                            <span v-for="(item,index) in paixu" :key="index" v-text="item.name" :class="{price:item.state == 'true'}" @click="selectMethod('1_'+item.id,index)" :id="'1_'+item.id"  class="cursor"></span>
+                        </div>
+                        <div class="pages">
+                            <span>页码:<i class="currentPages" v-text="currentPageNum"></i>/<i v-text="pagesTotal"></i></span>
+                            <span class="pagesLeft" @click="change('left')"><Icon type="arrow-left-b"></Icon></span>
+                            <span class="pagesRight" @click="change('right')"><Icon type="arrow-right-b"></Icon></span>
+                        </div>
+                    </div>
+                </div>   
+                <div class="goodsList">
+                    <div v-show="!paixuresult">
+                    <div class="goodDiv" v-for="(item,index) in list" :key="index">
+                        <div class="imgDiv">
+                            <img :src="item.images[0]" alt="">
+                        </div>
+                        <div class="goodInfo">
+                            <p class="goodName"><i v-text="item.productName">故宫</i> <span class="color12"  v-text="item.placeLevel"></span></p>
+                            <p class="goodDes">
+                                <span>景点地址:</span>
+                                <span class="color33"   v-text="item.address"></span></p>
+                            <p class="goodDes">
+                                <span>营业时间:</span>
+                                <span class="color33"  v-text="item.otime"></span></p>
+                            <p class="goodDes">
+                                <span>景点主题:</span> 
+                                <span class="color33 features" v-text="item.themes"></span></p>
+                            <p class="goodDes">
+                                <span>景点特色:</span> 
+                                <span class="features" :title="item.introdution" v-text="item.introdution"></span></p>
+                        </div>
+                        <div class="goodPrice">
+                            <p class="goodPrice_price"><span class="font30" v-text="item.price"></span>点起</p>
+                            <p class="goodPrice_button cursor" @click="todetail(item)"><span>查看详情</span></p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="noResults" v-show="paixuresult">
+                        <div class="noResult_tip">
+                            <p class="color80">没有找到你需要的产品，建议您看看其他类~</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Paging">
+                    <Page :total="totalPages"  show-elevator page-size="5" class-name="pageStyle" @on-change="change" :current="currentPageNum"></Page>
+                </div>
+            </div> 
+        </div> 
+        </div> 
+    </div>
+    <!-- 公共左边 -->
+    <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+    <!-- 公共左边结束 -->
+    <!-- 公用底部 -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/list.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+.order_state{
+    width:100%;
+    margin-top:78px;
+}
+.commonCss{
+    border-bottom:2px solid #2fd0b5;
+    height:42px;
+    font-size:14px;
+}
+.commonBox{
+    width:176px;
+    height:100%;
+    line-height:42px;
+    background: url(../img/ico.png) no-repeat -23px -711px;
+    border-top-left-radius: 1px;
+}
+.state{
+    background: url(../img/ico.png) no-repeat -136px -58px;
+    width:22px;
+    height:22px;
+    vertical-align: middle;
+}
+.proico{
+    background: url(../img/ico.png) no-repeat -175px -58px;
+    width:22px;
+    height:22px;
+    vertical-align: middle;
+}
+.state_info{
+    display: flex;
+    align-items: center;
+    height:50px;
+    line-height:50px;
+    color:#1a1a1a;
+}
+.width300{
+    width:300px;
+}
+.leftName{
+    width:674px;
+}
+.leftNum{
+    width:100px;
+}
+.leftPrice{
+    width:170px;
+}
+.leftTaltol{
+    width:120px;
+}
+.borderBottom{
+    border-bottom:1px solid #d9d9d9;
+}
+.costico{
+    background: url(../img/ico.png) no-repeat -212px -55px;
+    width:22px;
+    height:27px;
+    vertical-align: middle;
+}
+.payico{
+    background: url(../img/ico.png) no-repeat -289px -56px;
+    width:25px;
+    height:25px;
+    vertical-align: middle;
+}
+.tourist{
+    background: url(../img/ico.png) no-repeat -248px -56px;
+    width:24px;
+    height:24px;
+    vertical-align: middle;
+}
+.coloe1a{
+    color:#1a1a1a;
+}
+.colorff7{
+    color:#ff7900;
+}
+.settlement{
+    background:#e6e6e6;
+    height:80px;
+    margin-top:55px;
+    font-size:12px;
+    display: flex;
+    margin-bottom:20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.color2e{
+    color:#2ed2c1;
+}
+.width74{
+    width:100px;
+    border-radius:7px;
+}
+.width500{
+    width:500px;
+}
+.color6c{
+    color:#6c6c6c;
+    font-size:14px;
+}
+.contact{
+    height:50px;
+    line-height:50px;
+    color:#1a1a1a;
+}
+.paddingL{
+    padding-left:100px;
+}

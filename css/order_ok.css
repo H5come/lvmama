@@ -1,0 +1,44 @@
+.Process{
+    width: 790px;
+    height: 110px;
+    margin: 85px auto 55px;
+    background: url(../img/ico.png) no-repeat -10px -485px;
+}
+.orderList{
+    width:100%;
+    padding:25px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto ;
+}
+.bgf7{
+    background:#f7f7f7;
+}
+.Enterpass{
+    margin-top:50px;
+    font-size:14px;
+    border:1px solid #ffdaac;
+    height:80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.payM{
+    width:170px;
+    height:30px;
+    line-height:30px;
+    border-radius:5px;
+    background:#2fd0b5;
+}
+.modal6{
+    font-size:14px;
+    color:#666;
+}
+.modal6  .ivu-modal{
+    height:170px;
+}
+.modal6 .ivu-modal-header-inner,.modal6 .ivu-modal-body p{
+    font-size:14px;
+    color:#666;
+    font-weight:100;
+}

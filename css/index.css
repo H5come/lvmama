@@ -1,3 +1,6 @@
+#index{
+    position: relative;
+}
 .mainTopic{
     width:100%;
     height:220px;
@@ -6,11 +9,47 @@
 .content{
     
 }
-.row{
+div.row{
     height:100%; 
+    overflow: hidden;
+    position: relative;
+    margin-right:0;
+    margin-left:0;
+}
+.row span{
+    cursor: pointer;
+}
+.row .bd,.row, .bd .tempWrap{
+    height:100%;
+    margin: 0 auto;
+}
+.row .hd .prev,.row .hd .next{  
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 90px;
+}
+.row .hd .prev{
+    background: url(../../../../images/juyoufuli/cake-full.png) no-repeat 8px 2px;
+}
+.row .hd .next{
+    background: url(../../../../images/juyoufuli/cake-full.png) no-repeat -22px 3px;
+    right: 0;
+}
+.lvmama_all{
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    left: 0; 
+    position: relative; 
+    overflow: hidden; 
+    padding: 0px; 
+    margin: 0px;
 }
 .i-col{
+    margin: 0 5px;
     height:100%;
+    width:190px;
 }
 .imgDiv{
     width:100%;
@@ -43,7 +82,7 @@
     /* display: block; */
 }
 .i-span{
-    color:#f7a945;
+    color:#333;
     font: bold 14px "Microsoft YaHei";
 }
 .i-span i{
@@ -61,15 +100,18 @@
     width:100%;
     padding:19px 12px 27px;
     height:267px;
-    display: flex;
-    justify-content: space-around;
 }
 .floorRow{
     width:223px;
+    height:100%;
+    float:left;
+    margin-right:10px;
 }
 .floorImgDiv{
     height:150px;
     width:100%;
+    background:url(../img/zhanwei.jpg) no-repeat center center;
+    background-size:100% 100%;
 }
 .floorDesc{
     padding:8px 10px;

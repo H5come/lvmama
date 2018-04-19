@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">  
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">    
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/order.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>提交订单</title>
+    <style>
+        div.footer{bottom:auto}
+        .footer img{width:242px;height:54px;}
+        .ivu-spin-fix{position: fixed;}
+    </style>
+</head>
+<body style="background:#fff;">
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->
+    <div id="order" class="widthDiv">
+        <Spin fix  v-show="loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>
+        <div v-show="!loading">
+        <div class="Process"></div>
+        <div class="order_content">
+            <div class="Cost_details">
+                <p class="color66 font16">费用明细</p> 
+                <p class="color33">门票价格:  <i class="color12" v-text="marketPrice"></i></p>
+                <p class="color33">订单总金额:  <i class="color12" v-text="totalPrice"></i></p>
+            </div>
+            <div class="CalendarDiv">
+               <div class="commonTil padding20">
+                   <div class="ticketTil">
+                       <span class="color3b" v-text="goods.goodsName"></span>
+                       <span class="color12" @click="needShow()">预定需知 <Icon type="arrow-down-b"></Icon></span>
+                   </div>
+                   <div class="needKnow border padding20" v-show="needKnow">
+                        <div class="color66 widthSpecial ellipsis" v-for="(items,index) in ryxz" :key="index" v-text="items" :title="items"></div>   
+                    </div>
+               </div> 
+               <div class="DatePickDiv padding20">
+                   <i class="color12">*</i><i>出游日期</i>
+                   <Date-picker type="date" placeholder="请选择日期" format="yyyy-MM-dd" open="true" editable="false" class="datePickId"  @on-change="change" :options="options" v-model="valueDate"></Date-picker>
+                   <div class="margin10">
+                        <i class="color12">*</i><i>出游人数</i>
+                        <span class="border inlineBlock marginL">
+                            <Icon type="minus" class="minusCommon commonIpt" @click.native="travellersNum(1)"></Icon><input class="commonIpt" type="text" v-model="travellers" disabled><Icon class="commonIpt plusCommon" type="plus"  @click.native="travellersNum(2)"></Icon>
+                        </span>
+                        <i>最多可预定6张</i>
+                    </div>
+               </div>
+            </div>
+            <div class="userInfoDiv">
+                <div class="commonTil padding20">
+                    <div class="ticketTil">
+                        <span class="color3b">用户信息</span>
+                        <span class="color66">您需要填写 <i v-text="userArr"></i>个人的信息</span>
+                    </div>
+                </div>
+                <div class="fillUser">
+                    <div class="commonForm">
+                        <p class="color12 lineHeight">取票人</p>
+                        <div class="userInfo">
+                            <div class="lineHeight"><i class="color12">*</i><i class="color66">中文姓名：</i> <input type="text" v-model="name" placeholder="请输入姓名" class="border userInfoIpt"/></div>
+                            <div  class="lineHeight"><i class="color12">*</i><i class="color66">手机号码：</i> <input type="text" v-model="phone" placeholder="手机号码"  class="border userInfoIpt"/></div>
+                            <div  class="lineHeight" v-show="goods.goodsSort == 'special'"><i class="color12">*</i><i class="color66">收货地址：</i> <input type="text" v-model="address" placeholder="请输入收货地址"  class="border userInfoIpt"/></div>
+                        </div> 
+                    </div>
+                    <div class="commonForm" v-for="index in userArr" :key="index">
+                        <p class="color33 lineHeight" v-text="'游玩人'+ index"></p>
+                        <div class="userInfo" :id="'player'+index">
+                            <div class="lineHeight"><i class="color12">*</i><i class="color66">中文姓名：</i> <i-input type="text"  placeholder="请输入姓名" :id="'name'+index" class="border userInfoIpt" @on-blur="blur('name'+index)" ></i-input></div>
+                            <div  class="lineHeight"><i class="color12">*</i><i class="color66">手机号码：</i> <i-input type="text"  placeholder="手机号码"  :id="'phone'+index" class="border userInfoIpt"  @on-blur="blur('phone'+index)"></i-input></div>
+                            <div class="lineHeight"><i class="color12">*</i><i class="color66">证件类型：</i> 
+                                <i-select v-model="select" style="width:100px" class="iselect">
+                                    <i-option :value="select"></i-option>
+                                </i-select>
+                                <i-input type="text"  placeholder="请输入证件号"  class="border userInfoIpt" :id="'id'+index" @on-blur="blur('id'+index)"></i-input>
+                            </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="bgfffce9 orderCost padding20">
+                <div>
+                  <span class="color33">订单金额:</span>
+                  <span><i class="font30"  v-text="totalPrice"></i><i class="color12">点</i></span>  
+                </div>
+                <div class="bg colorff toPay textCenter" @click="toPay()">去支付</div>
+            </div>
+        </div>
+        </div>
+        <!-- 公共左边 -->
+        <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+        <!-- 公共左边结束 -->
+        <!-- 公用底部 -->
+        <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+        <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/order.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.Process{
+    width: 790px;
+    height: 110px;
+    margin: 85px auto 55px;
+    background: url(../img/ico.png) no-repeat -10px -588px;
+}
+.ok{
+    background:url(../img/ico.png) no-repeat -135px -58px;
+    width:35px;
+    height:33px;
+    vertical-align: middle;
+}

@@ -1,0 +1,54 @@
+
+.lv_order_list{
+    width:100%;
+}
+.lv_order_list .order{
+    height:132px;
+}
+.order_top{
+    background:#eafaf7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:#333;
+    font-size:12px;
+}
+.leftName{
+    width:674px;
+}
+.leftNum{
+    width:100px;
+}
+.leftPrice,.leftTaltol{
+    width:120px;
+}
+.order_det{
+    display: flex;
+    height:100px;
+}
+.det_left{
+    width:1004px;
+    font-size:14px;
+    color:#4d4d4d;
+    border-right:1px solid #ebebeb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.det_right{
+    flex:1;
+    padding:20px 0;
+}
+.detial{
+    height:35px;
+    line-height:35px;
+    width:92px;
+    border-radius:8px;
+    transform: translateX(55%);
+}
+.detial:hover{
+    background: #35A794!important;
+    transition: background .5s linear;
+    -webkit-transition: background .5s linear;
+    cursor:pointer;
+}

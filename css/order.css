@@ -1,0 +1,200 @@
+.Process{
+    width: 790px;
+    height: 110px;
+    margin: 85px auto 55px;
+    background: url(../img/ico.png) no-repeat -10px -369px;
+}
+.order_content{
+    position:relative;
+    border:3px solid #ffc073;
+    width:798px;
+    min-height:912px;
+    margin: 0 auto;
+}
+.Cost_details{
+    position: absolute;
+    right:-205px;
+    top:0;
+    width:190px;
+    height:178px;
+    background:url(../img/ico.png) no-repeat -10px -196px;
+    padding:27px 0 27px 22px;
+}
+.Cost_details p{
+    margin-bottom:25px;
+}
+.CalendarDiv{
+    widows: 100%;
+    height:590px;
+    border-bottom:2px solid #ffc073;
+}
+.commonTil{
+    width:100%;
+    height:76px;
+    line-height:76px;
+    background: #f8f8f8;
+}
+.needKnow{
+    position: absolute;
+    left: 170px;
+    top: 59px;
+    width: 400px;
+    height: 326px;
+    z-index: 1;
+    line-height:40px;
+    background:#f3e1cb;
+    padding:20px;
+}
+.DatePickDiv{
+    width:100%;
+    height:512px;
+    border-bottom:3px solid #ffc073;
+}
+.datePickId{
+    width:200px;
+    margin-left:10px;
+}
+.datePickId .ivu-picker-panel-body{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+.datePickId .ivu-picker-panel-content{
+    width:100%;
+    height:100%;
+}
+.datePickId .ivu-date-picker-cells{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.datePickId .ivu-date-picker-cells-header{
+    background: #535d63;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;    
+}
+.datePickId .ivu-date-picker-cells-header span{
+    color:#fff;
+    font-weight:600;
+    font-size:14px;
+}
+.datePickId .ivu-date-picker-cells-cell{
+    width: 80px;
+    height: 55px;
+    border-left:1px solid #d5d5d5;
+    border-bottom:1px solid #d5d5d5;
+}
+.datePickId .ivu-date-picker-cells span em{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+.datePickId .ivu-input-icon{
+    z-index:0;
+}
+.datePickId .ivu-date-picker-cells-cell-selected em,.datePickId .ivu-date-picker-cells-cell-selected:hover em{
+    background: transparent;
+    color:#666;
+}
+.datePickId .ivu-date-picker-cells-cell:hover  em{
+    background: transparent;
+    color:#666;
+}
+.ivu-date-picker-cells-cell-today em:after{
+    width:0;
+}
+.margin10{
+    margin-top: 405px;
+}
+.commonIpt{
+    width:30px;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+}
+input.commonIpt{
+    outline: none;
+    border: none;
+}
+input.commonIpt[type="text"]:disabled{ 
+    background:#fff;   
+}
+.minusCommon{
+    border-right:1px solid #d5d5d5;
+}
+.plusCommon{
+    border-left:1px solid #d5d5d5;
+}
+.iselect  .ivu-select-selection{
+    outline:none;
+    border-radius: 0;
+    width: 100px;
+    height: 36px;
+    left: 5px;
+}
+.userInfoDiv{
+    width:100%;
+}
+.fillUser{
+    padding:30px 20px;
+}
+.commonForm{
+    padding:20px 0;
+}
+.DatePickDiv  div.ivu-select-dropdown{
+    width: 562px;
+    height: 391px;
+    margin:0;
+    border:1px solid #d5d5d5;
+    z-index:0;
+    left:99px!important;
+    top:111px!important;
+}
+.lineHeight{
+    height:45px;
+    line-height:30px;
+}
+.userInfo{
+    border-bottom:1px dashed #d5d5d5;
+    padding: 10px 0;
+}
+.commonForm:last-child .userInfo{
+    border-bottom:none;
+}
+.userInfoIpt{
+    width:234px;
+    height:36px;
+    padding:0 5px;
+    line-height:36px;
+    margin-left:5px;
+}
+.orderCost{
+    width:798px;
+    height:87px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border:1px solid #ffdaac;
+    margin:60px auto;
+}
+.toPay{
+    width:105px;
+    height:33px;
+    line-height:33px;
+}
+.userInfoIpt  .ivu-input{
+    border:none;
+    outline:none;
+}
+.userInfoIpt  .ivu-input:focus{
+    border-color: transparent; 
+    outline:none;
+    box-shadow: 0 0 0 0;
+}
+.ivu-select-selection:hover{
+    border-color: transparent; 
+}
+.colorff{
+    color:#fff!important;
+}

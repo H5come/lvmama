@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">   -->
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">    
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/order_ok.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>确认订单</title>
+    <style>
+        @media screen and (max-width:1366px){
+            div.footer{bottom:auto}
+        }
+        .footer img{width:242px;height:54px;}
+        .ivu-spin-fix{position: fixed;}
+    </style>
+</head>
+<body style="background:#fff;">
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->
+    <div id="orderOk" class="widthDiv">
+        <Spin fix  v-show="loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>
+        <div  v-show="!loading">
+        <div class="Process"></div>
+        <div class="orderList border">
+            <div class="listMain color33 fontweight">
+                <div class="height30">
+                    <span>产 品 名 称：</span>
+                    <span v-text="goods.orderName"></span>
+                </div>
+                <div class="height30">
+                    <span>游 玩 时 间：</span>
+                    <span v-text="goods.playTime"></span>
+                </div>
+                <div class="height30">
+                    <span>订 单 金 额：</span>
+                    <span><i class="color12"  v-text="goods.price"></i>点</span>
+                </div>
+            </div>
+            <div class="pay">
+                <span class="color33">应付金额:</span> 
+                <span class="color33 "><i class="font16 colorfc6"  v-text="goods.price"></i>点</span>    
+            </div>
+        </div>
+        <div class="textCenter color99 bgf7 height30">请您在提交订单后 <i class="colorfc6"  v-text="timer"></i> 内完成支付，否则订单会自动取消</div>
+        <div class="padding20 Enterpass color33">
+            <div class="card  fontweight">
+                <span>聚优卡号:</span>
+                <span v-text="cartName"></span>
+            </div>
+            <div class="pass fontweight">
+                <span>聚优密码:</span>
+               <input type="password" v-model.trim="password" placeholder="请输入密码">
+            </div>
+            <div class="payM colorff textCenter " @click="pay()">立即支付</div>
+        </div>
+        </div>
+    </div>
+    <!-- 公共左边 -->
+    <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+    <!-- 公共左边结束 -->
+    <!-- 公用底部 -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/order_ok.js"></script>
+</body>
+</html>

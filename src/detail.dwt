@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">  
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/public.css">    
+    <link rel="stylesheet" type="text/css" href="themes/default/lvmama_pc/css/detail.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/juyoufuli/public.css">
+    <!-- <script src="{$app_path}js/juyoufuli/jquery.min.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{$app_path}js/juyoufuli/jquery.SuperSlide.2.1.1.source.js"></script>
+    <title>详情页</title>
+    <style>
+        div.footer{bottom:auto}
+        .footer img{width:242px;height:54px;}
+        .ivu-spin-fix{position: fixed;}
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <!-- #BeginLibraryItem "/library/page_top.lbi" --><!-- #EndLibraryItem -->
+    <!-- 头部结束 -->
+    <div id="detail" class="widthDiv  marginB">
+        <Spin fix v-show="loading">
+            <div class="loader">
+                <svg class="circular" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"></circle>
+                </svg>
+            </div>
+        </Spin>
+        <div class="goodDetail border"  v-show="!loading">
+            <div class="photos">
+                <div class="bigPhoto">
+                    <img :src="bigImage" alt="">
+                </div>
+                <div class="smallPhotos">
+                    <div class="hd">           
+                        <span class="prev prevStop"><Icon type="chevron-left"></Icon></span>
+                        <span class="next"><Icon type="chevron-right"></Icon></span>
+                    </div>
+                    <div class="bd">
+                        <ul class="small_ul">
+                            <li class="small_li" @click="toBigSrc(item)" v-for="(item,index) in product.images" :key="index">
+                                <img :src="item" alt="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="goods">
+                <div class="goodsName">
+                    <span class="name"><span v-text="product.productName" class="width80 inlineBlock ellipsis" :title="product.productName"></span></span>
+                    <span class="width160 inlineBlock"><i class="font30" v-text="product.price"></i>点起</span>
+                </div>
+                <div><i class="color12" v-text="product.placeLevel"></i></div> 
+                <div class="common">
+                    <span class="color33">景点地址:</span>
+                    <span class="color33" v-text="product.address"></span>
+                </div>
+                <div class="common">
+                    <span class="color33">营业时间:</span>
+                    <span class="color33 width80" v-text="product.openTimeInfo"></span>
+                </div>
+                <div class="common">
+                    <span class="color33">景点主题:</span>
+                    <span class="color33"  v-text="product.themes"></span>
+                </div>
+                <div class="common">
+                    <span class="color33">景点特色:</span>
+                    <span class="color33 elli"   v-text="product.characteristic" :title="product.characteristic"></span>
+                </div>
+                <p class="good_btn bg colorff cursor" @click="scroll()"><i class="yudIco"></i>立即预定</p>
+            </div>
+        </div>
+        <div class="Adult_ticket border">
+            <p class="Adult_title padding20">景点门票</p>
+            <div class="Adult_info" v-for="(item,index) in goods" :key="index" :id="item.goodsId">
+                <div class="info_title padding20 cursor" @click="showInfo(item.goodsId)">
+                    <span class="flex1"><span v-text="item.goodsName"></span><Icon type="chevron-down" :class="'down'+item.goodsId" class="downActive"></Icon></span>
+                    <span class="color99 flex1" v-text="item.aheadHour"></span>
+                    <span  class="flex1"><i class="font18"  v-text="item.price"></i>点</span>
+                    <span class="flex1" @click="Predefined(item.goodsId)"> <span class="Adult_btn">预定</span></span>
+                </div>
+                <div class="info_detail" :class="'info'+item.goodsId">
+                    <Icon type="chevron-up" class="style"></Icon>
+                    <div class="common">
+                        <span class="color66">费用包含</span>
+                        <span class="color66  ellipsis width80" v-text="item.costInclude"  :title="item.costInclude"></span>
+                    </div>
+                    <div class="common1">
+                        <span class="color66 common">入园需知</span>
+                        <span class="color66 widthSpecial">
+                            <div class="">
+                                <p class="color66 common ellipsis widthSpecial" v-for="(items,index) in item.info.ryxz" :key="index" v-text="items"></p>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="common">
+                        <span class="color66">重要提示</span>
+                        <span class="color66 ellipsis width80"  v-text="item.info.importantNotice" :title="item.info.importantNotice"></span>
+                    </div>
+                    <div class="common">
+                        <span class="color66">退票说明</span>
+                        <span class="color66  ellipsis width80"  v-text="item.info.refundRuleNotice"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scheduled border">
+            <div class="scheduled_top"></div>
+            <div class="scheduled_main">
+                <div class="policy">
+                    <h3 class="color3b fontweight marginB">免费政策</h3>
+                    <p class="color66" v-for="(item,index) in product.freePolicy"><span v-text="item"></span></p>      
+                </div>
+                <div class="policy">
+                    <h3 class="color3b fontweight marginB">优惠政策</h3>
+                    <p class="color66" v-for="(item,index) in product.offerCrowd"><span  v-text="item"></span></p>           
+                </div>
+                <div class="policy">
+                    <h3 class="color3b fontweight marginB">开具发票</h3>
+                    <div class="color66"><i>*</i>以上信息仅供参考，还得花很快发货</div>              
+                </div>
+            </div>
+        </div>
+        <div class="scenicSpot border marginB">
+            <div class="scenicSpot_top"></div>
+            <div class="scenicSpot_main">
+                <div class="policy borderNone">
+                    <h3 class="color3b fontweight marginB bgo padding20" v-text="product.productName+'简介'"></h3>
+                    <div class="text" v-text="product.introdution"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 公共左边 -->
+    <!-- #BeginLibraryItem "/library/page_left.lbi" --><!-- #EndLibraryItem -->
+    <!-- 公共左边结束 -->
+    <!-- 公用底部 -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+    <!-- 底部结束 -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-beta.44/polyfill.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> 
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/public.js"></script>
+    <script type="text/javascript" src="themes/default/lvmama_pc/js/detail.js"></script>
+</body>
+</html>
